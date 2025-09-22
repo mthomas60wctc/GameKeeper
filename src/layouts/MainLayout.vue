@@ -5,7 +5,7 @@
         <q-btn dense flat round icon="menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title>
-          <router-link to="/" class="text-white" style="text-decoration: none;">
+          <router-link to="/" class="text-white" style="text-decoration: none">
             GameKeeper
           </router-link>
         </q-toolbar-title>
@@ -52,6 +52,8 @@
 <script setup>
 import { ref } from 'vue'
 import { useQuasar } from 'quasar'
+import { useRoute } from 'vue-router'
+import { useMeta } from 'quasar'
 import '../css/mainLayout.scss'
 
 const $q = useQuasar()
@@ -71,4 +73,10 @@ const menuItems = [
 function toggleDarkMode() {
   $q.dark.toggle()
 }
+
+const route = useRoute()
+
+useMeta(() => ({
+  title: route.meta.title || 'GameKeeper',
+}))
 </script>
