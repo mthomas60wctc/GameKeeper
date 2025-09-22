@@ -1,9 +1,3 @@
-import IndexPage from 'pages/IndexPage.vue'
-import newInstance from 'pages/newInstance.vue'
-import newGame from 'pages/newGame.vue'
-import ongoingGame from 'pages/ongoingGame.vue'
-import recordsView from 'pages/recordsView.vue'
-
 const routes = [
   {
     path: '/',
@@ -11,27 +5,27 @@ const routes = [
     children: [
       {
         path: '',
-        component: () => IndexPage,
+        component: () => import('pages/IndexPage.vue'),
         meta: { title: 'Home | GameKeeper' },
       },
       {
         path: 'ongoingGame',
-        component: () => ongoingGame,
+        component: () => import('pages/ongoingGame.vue'),
         meta: { title: 'Ongoing Game | GameKeeper' },
       },
       {
         path: 'newGame',
-        component: () => newGame,
+        component: () => import('pages/newGame.vue'),
         meta: { title: 'New Game | GameKeeper' },
       },
       {
         path: 'newInstance',
-        component: () => newInstance,
+        component: () => import('pages/newInstance.vue'),
         meta: { title: 'New Instance | GameKeeper' },
       },
       {
         path: 'recordsView',
-        component: () => recordsView,
+        component: () => import('pages/recordsView.vue'),
         meta: { title: 'Records | GameKeeper' },
       },
     ],
