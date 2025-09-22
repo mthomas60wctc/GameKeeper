@@ -44,7 +44,7 @@ export default defineConfig((/* ctx */) => {
 
       // rebuildCache: true, // rebuilds Vite/linter/etc cache on startup
 
-      // publicPath: '/',
+      publicPath: '/GameKeeper/',
       // analyze: true,
       // env: {},
       // rawDefine: {}
@@ -79,7 +79,7 @@ export default defineConfig((/* ctx */) => {
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-file#framework
     framework: {
       config: {
-        dark: true // or 'auto' or false
+        dark: true, // or 'auto' or false
       },
 
       // iconSet: 'material-icons', // Quasar icon set
