@@ -4,4 +4,6 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+console.log('Index Page Loaded')
+</script>
