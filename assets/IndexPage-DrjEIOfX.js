@@ -1,0 +1,1 @@
+import{_ as t}from"./_plugin-vue_export-helper-DlAUqK2U.js";import{S as o,L as s,R as r}from"./index-DluuobcX.js";const a={},c={class:"q-pa-md"};function n(d,e){return s(),o("div",c,[...e[0]||(e[0]=[r("div",{class:"text-h6"},"Welcome to GameKeeper",-1)])])}const f=t(a,[["render",n]]);export{f as default};
