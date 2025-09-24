@@ -2,7 +2,7 @@
   <div class="q-pa-lg q-gutter-lg">
     <div class="row q-gutter-md items-end">
       <q-select
-        filled
+        outlined
         v-model="gameSelected"
         use-input
         input-debounce="0"
@@ -17,17 +17,18 @@
       >
         <template v-slot:no-option>
           <q-item>
-            <q-item-section class="text-grey"> No matching game - Create a new game!</q-item-section>
+            <q-item-section class="text-grey">
+              No matching game - Create a new game!</q-item-section
+            >
           </q-item>
         </template>
       </q-select>
-      
       <q-btn
         icon="add"
         label="New Game"
         color="red"
         class="q-mb-sm"
-      @click="$router.push('/newGame')"
+        @click="$router.push('/newGame')"
       />
     </div>
     <div v-if="selectedPlayers.length" class="q-mt-lg">
@@ -46,7 +47,7 @@
         </q-chip>
       </div>
     </div>
-    <div v-if="availablePlayers.length" class="q-mt-lg">
+    <div class="q-mt-lg">
       <div class="text-subtitle2 q-mb-sm">Available Players:</div>
       <div class="q-gutter-sm">
         <q-chip
@@ -60,19 +61,22 @@
         >
           {{ player }}
         </q-chip>
+        <q-chip
+          clickable
+          @click="newPlayerDialog = true"
+          color="grey-4"
+          text-color="dark"
+          icon="person_add"
+        >
+          New Player
+        </q-chip>
       </div>
     </div>
 
-  <q-separator />
+    <q-separator />
   </div>
   <div class="row justify-between">
-    <q-btn
-      label="Reset Form"
-      icon="refresh"
-      color="amber-14"
-      flat
-      @click="resetForm"
-    />
+    <q-btn label="Reset Form" icon="refresh" color="amber-14" flat @click="resetForm" />
     <q-btn
       label="Start Game"
       icon="play_arrow"
@@ -83,6 +87,29 @@
       :disable="!gameSelected || selectedPlayers.length === 0"
     />
   </div>
+  <q-dialog v-model="newPlayerDialog" backdrop-filter="blur(4px)">
+    <q-card style="min-width: 350px">
+      <q-card-section>
+        <div class="text-h6">New Player</div>
+      </q-card-section>
+
+      <q-card-section class="q-pt-none">
+        <q-input
+          outlined
+          color="red"
+          label="Player Name"
+          v-model="newPlayerName"
+          autofocus
+          @keyup.enter="createPlayer()"
+        />
+      </q-card-section>
+
+      <q-card-actions class="justify-between text-primary">
+        <q-btn flat color="grey" icon="cancel" label="Cancel" v-close-popup />
+        <q-btn flat icon="add" color="red" label="Add" v-close-popup @click="createPlayer()" />
+      </q-card-actions>
+    </q-card>
+  </q-dialog>
 </template>
 
 <script setup>
@@ -95,6 +122,8 @@ const gameSelected = ref(null)
 const chipColors = ref([])
 const selectedPlayers = ref([])
 const newGameName = ref('')
+const newPlayerDialog = ref(false)
+const newPlayerName = ref('')
 
 const availablePlayers = computed(() => {
   return playersFull.filter((player) => !selectedPlayers.value.includes(player))
@@ -149,6 +178,17 @@ function filterFn(val, update) {
     const needle = val.toLowerCase()
     games.value = gamesFull.filter((v) => v.toLowerCase().indexOf(needle) > -1)
   })
+}
+
+//todo: add error text if player name is empty or already exists
+function createPlayer() {
+  const name = newPlayerName.value.trim()
+  if (name && !playersFull.includes(name)) {
+    playersFull.push(name)
+    addPlayer(name)
+    newPlayerName.value = ''
+    newPlayerDialog.value = false
+  }
 }
 
 function addPlayer(player) {

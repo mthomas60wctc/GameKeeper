@@ -1,6 +1,9 @@
 <template>
   <div class="q-pa-md">
     <div class="text-h6">Create a New Game</div>
+    <div class="q-mt-md">
+      <q-input outlined label="Game Title" v-model="gameTitle" />
+    </div>
   </div>
   <q-separator />
   <div class="row justify-between">

@@ -2,6 +2,7 @@
   <div class="q-pa-md">
     <div class="text-h6">Individual Records</div>
     <q-select
+      outlined
       v-model="selectedGame"
       :options="gameOptions"
       label="Select game(s)"
